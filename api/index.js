@@ -1,8 +1,12 @@
 import express from "express";
-import router from "./router";
+import userRouter from "./components/user";
 
 const app = express();
 
-app.use(router);
+//? Esto sirve para poder leer el body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/v1/", userRouter);
 
 app.listen(8080);
