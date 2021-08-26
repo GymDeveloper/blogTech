@@ -1,10 +1,10 @@
 {
-  "name": "blogTech",
+  "name": "blog-tech",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node ./api/index.js"
   },
   "keywords": [],
   "author": "",
