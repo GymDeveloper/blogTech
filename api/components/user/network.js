@@ -1,10 +1,10 @@
 import express from "express";
-import { login, signUp, show, update, destroy, showAll } from "./controller";
+import { show, update, destroy, showAll } from "./controller";
 
 const userRouter = express.Router();
 
-userRouter.route("/login").post(login);
-userRouter.route("/signUp").post(signUp);
+// Lo que debo proteger es lo siguiente
+//? Para poder proteger mi ruta debo usar all()
 userRouter.route("/show/:id").get(show);
 userRouter.route("/update/:id").put(update);
 userRouter.route("/destroy/:id").delete(destroy);
