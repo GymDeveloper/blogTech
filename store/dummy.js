@@ -2,7 +2,7 @@
 const db = {
   users: [
     {
-      id: 1,
+      id: "L3HS",
       name: "Linder",
       last_name: "Hassinger",
       email: "linder@gmail.com",
@@ -23,4 +23,27 @@ export const store = async (table, data) => {
   //* CREO UN DATO Y RETORNO LA LISTA COMPLETA
   await db[table].push(data);
   return await list(table);
+};
+
+export const find = async (table, id) => {
+  //? Primero obtengo la lista de datos
+  const dataList = await list(table);
+
+  //? Buscar por id
+  return dataList.find((data) => data.id === id);
+};
+
+export const remove = async (table, id) => {
+  const dataList = await list(table);
+
+  //* primero debemos encontrar el indice
+  const index = dataList.findIndex((data) => data.id === id);
+
+  if (index === -1) {
+    return false;
+  }
+
+  await db[table].splice(index, 1);
+
+  return true;
 };

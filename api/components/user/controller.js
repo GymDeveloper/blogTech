@@ -7,9 +7,11 @@
  * * Delete user => Id => DELETE
  */
 import { response } from "../../../network";
-import { list, store } from "../../../store/dummy";
+import { list, store, find, remove } from "../../../store/dummy";
 import { nanoid } from "nanoid";
 //*POST
+const USER_TABLE = "users";
+
 export const login = (req, res) => {
   // ?Destructuracion
   const { email, password } = req.body;
@@ -32,18 +34,16 @@ export const signUp = async (req, res) => {
     password: user.password,
   };
 
-  const users = await store("users", data);
+  const users = await store(USER_TABLE, data);
 
   return response({ res, data: users });
 };
 
-export const show = (req, res) => {
+export const show = async (req, res) => {
   const { id } = req.params;
 
-  return response({
-    res,
-    data: { id },
-  });
+  const user = await find(USER_TABLE, id);
+  return response({ res, data: user });
 };
 
 export const update = (req, res) => {
@@ -55,19 +55,22 @@ export const update = (req, res) => {
   });
 };
 
-export const destroy = (req, res) => {
+export const destroy = async (req, res) => {
   const { id } = req.params;
 
-  return response({
-    res,
-    data: { id },
-  });
+  const user = await remove(USER_TABLE, id);
+
+  if (!user) {
+    return response({ res, ok: false, data: { error: "User not found" } });
+  }
+
+  return response({ res, data: { success: "User deleted successfully!" } });
 };
 
 //* LISTA USUARIOS
 export const showAll = async (req, res) => {
   //* Aca traigo la lista de usuarios
-  const users = await list("users");
+  const users = await list(USER_TABLE);
 
   return response({ res, data: users });
 };
