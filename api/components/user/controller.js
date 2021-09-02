@@ -7,6 +7,7 @@
  * * Delete user => Id => DELETE
  */
 import { response } from "../../../network";
+import { list } from "../../../store/dummy";
 //*POST
 export const login = (req, res) => {
   // ?Destructuracion
@@ -25,4 +26,39 @@ export const signUp = (req, res) => {
     res,
     data: { name, last_name, email, password },
   });
+};
+
+export const show = (req, res) => {
+  const { id } = req.params;
+
+  return response({
+    res,
+    data: { id },
+  });
+};
+
+export const update = (req, res) => {
+  const { id } = req.params;
+
+  return response({
+    res,
+    data: { id },
+  });
+};
+
+export const destroy = (req, res) => {
+  const { id } = req.params;
+
+  return response({
+    res,
+    data: { id },
+  });
+};
+
+//* LISTA USUARIOS
+export const showAll = async (req, res) => {
+  //* Aca traigo la lista de usuarios
+  const users = await list("users");
+
+  return response({ res, data: users });
 };
