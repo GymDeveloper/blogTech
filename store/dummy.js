@@ -8,6 +8,27 @@ const db = {
       email: "linder@gmail.com",
       password: "linder3",
     },
+    {
+      id: "POO",
+      name: "Juanito",
+      last_name: "Zapata",
+      email: "juan@gmail.com",
+      password: "linder3",
+    },
+  ],
+  stories: [
+    {
+      id: "h1oo",
+      title: "Historia 1",
+      content: "lorem midamdklmasldkasmlkasdm",
+      user_id: "L3HS",
+    },
+    {
+      id: "h2oo",
+      title: "Historia 2",
+      content: "lorem midamdklmasldkasmlkasdm",
+      user_id: "L3HS",
+    },
   ],
 };
 
