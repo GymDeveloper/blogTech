@@ -7,7 +7,8 @@
  * * Delete user => Id => DELETE
  */
 import { response } from "../../../network";
-import { list } from "../../../store/dummy";
+import { list, store } from "../../../store/dummy";
+import { nanoid } from "nanoid";
 //*POST
 export const login = (req, res) => {
   // ?Destructuracion
@@ -19,13 +20,21 @@ export const login = (req, res) => {
   });
 };
 
-export const signUp = (req, res) => {
-  const { name, last_name, email, password } = req.body;
+export const signUp = async (req, res) => {
+  const user = req.body;
 
-  return response({
-    res,
-    data: { name, last_name, email, password },
-  });
+  //* Creamos el data del usuario nuevo
+  const data = {
+    id: nanoid(),
+    name: user.name,
+    last_name: user.last_name,
+    email: user.email,
+    password: user.password,
+  };
+
+  const users = await store("users", data);
+
+  return response({ res, data: users });
 };
 
 export const show = (req, res) => {
