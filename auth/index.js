@@ -25,8 +25,8 @@ const verify = (token) => {
 //* checkToken => Se encarga de poder validar que el token recibido se valido
 
 /**
- * @param {*} authorization: string
- * @param {*} res: Response
+ * @param {string} authorization
+ * @param {Response} res
  */
 const getToken = (authorization, res) => {
   if (authorization === null) {
