@@ -1,6 +1,8 @@
 import express from "express";
 import userRouter from "./components/user";
 import authRouter from "./components/auth";
+import commentRouter from "./components/comments";
+import { save } from "./components/comments/controller";
 import { port, base_url } from "../config/config";
 import { checkToken } from "../auth";
 import { Server as WebSocketServer } from "socket.io";
@@ -39,8 +41,14 @@ io.on("connection", (socket) => {
       "bye:petter",
       "Un gran poder conlleva una gran responsabilidad"
     );
+  });
 
-    socket.emit("new:comment", "Escribe un comentario");
+  //? Evento para guardar comentarios para
+  // * Recibe el comentario desde el cliente y ademas lo guarda
+  socket.on("new:comment", async (body) => {
+    const res = await save(body);
+    //* Una vez que se guardo el comentario le response al cliente que todo ok
+    socket.emit("save:comment", res);
   });
 });
 
@@ -50,6 +58,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(`${base_url}/auth`, authRouter);
 app.use(`${base_url}/user`, checkToken, userRouter);
+app.use(`${base_url}/comments`, commentRouter);
 
 server.listen(port, () =>
   console.log(`listening on port http://localhost:${port}`)

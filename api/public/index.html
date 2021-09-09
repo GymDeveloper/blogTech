@@ -4,21 +4,44 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <title>Document</title>
   </head>
-  <style>
-    body {
-      font-family: "Helvetica Neue", Helvetica, Arial;
-    }
-  </style>
   <body>
-    <h1>Mi primera clase de Socket</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe eveniet,
-      maiores repellendus sapiente beatae excepturi amet autem nobis provident
-      quam, ab laudantium numquam voluptatum adipisci ullam? Dolor sit atque
-      quia!
-    </p>
+    <form action="" class="form-comment">
+      <div class="container">
+        <div class="row">
+          <h1>Crear comentarios</h1>
+          <div class="mb-3">
+            <input
+              placeholder="Comentario"
+              type="text"
+              name="comment"
+              class="form-control input-comment"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              name="author"
+              placeholder="Autor"
+              class="form-control input-author"
+            />
+          </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-block btn-primary">
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
   </body>
   <script src="/socket.io/socket.io.js"></script>
   <script src="./socket.js"></script>

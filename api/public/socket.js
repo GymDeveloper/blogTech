@@ -16,6 +16,29 @@ server.on("bye:petter", (message) => {
   console.log(message);
 });
 
-server.on("new:comment", (message) => {
-  console.log(`Message from server: ${message}`);
+// Capturar los texto de mis inputs
+//* Primero capture mi formulario que tiene la clase form-comment
+const form = document.querySelector(".form-comment");
+
+//? Cuando detectectes el evento submit de este form haz lo siguiente
+form.addEventListener("submit", function (e) {
+  //? Evitar que recargue la pagina
+  e.preventDefault();
+
+  const comment = e.target[0].value;
+  const author = e.target[1].value;
+  const body = { comment, author };
+
+  //* Envia el evento al servidor para que este guarde mensaje
+  server.emit("new:comment", body);
+
+  //* Esta a la espera de una respuesta
+  server.on("save:comment", (message) => {
+    console.log(message);
+  });
+
+  e.target[0].value = "";
+  e.target[1].value = "";
+
+  // ?Quiero guarda estos datos en un array en mi servidor
 });

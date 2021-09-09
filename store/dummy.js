@@ -30,6 +30,13 @@ const db = {
       user_id: "L3HS",
     },
   ],
+  comments: [
+    {
+      id: "ldkmslkadm",
+      comment: "Un gran poder conlleva una gran responsabilidad",
+      author: "Petter Parker",
+    },
+  ],
 };
 
 // Aqui vamos a poner las operaciones basicas del CRUD
