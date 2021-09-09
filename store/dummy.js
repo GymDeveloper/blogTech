@@ -47,6 +47,12 @@ export const list = async (table) => {
   return await db[table];
 };
 
+/**
+ * Se encarga de guarda informacion
+ * @param {string} table
+ * @param {Array<any>} data
+ * @returns
+ */
 export const store = async (table, data) => {
   //* CREO UN DATO Y RETORNO LA LISTA COMPLETA
   await db[table].push(data);
