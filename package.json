@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node ./api/index.js"
+    "dev": "nodemon --exec babel-node ./api/index.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +19,8 @@
     "nanoid": "^3.1.25",
     "nodemon": "^2.0.12",
     "socket.io": "^4.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.2.0"
   }
 }
