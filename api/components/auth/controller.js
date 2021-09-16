@@ -40,5 +40,5 @@ export const signUp = async (req, res) => {
 
   const users = await store(USER_TABLE, data);
 
-  return response({ res, data: users });
+  return response({ res, data: users, status: 201 });
 };
