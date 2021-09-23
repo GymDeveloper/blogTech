@@ -4,8 +4,6 @@ import { response } from "../../../network";
 import { hash } from "../../../helper/encrypt";
 import userModel from "../user/model";
 
-const USER_TABLE = "users";
-
 export const login = (req, res) => {
   // ?Destructuracion
   const user = req.body;
