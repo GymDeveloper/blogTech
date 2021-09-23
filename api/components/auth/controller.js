@@ -1,6 +1,7 @@
 import { sign } from "../../../auth";
 import { store } from "../../../store/dummy";
 import { response } from "../../../network";
+import { hash } from "../../../helper/encrypt";
 import userModel from "../user/model";
 
 const USER_TABLE = "users";
@@ -31,11 +32,12 @@ export const signUp = async (req, res) => {
 
   //* Creamos el data del usuario nuevo
   // borramos el id porque mongodb ya lo pone
+
   const data = {
     name: user.name,
     last_name: user.last_name,
     email: user.email,
-    password: user.password,
+    password: hash(user.password),
   };
 
   const users = await store(userModel, data);
