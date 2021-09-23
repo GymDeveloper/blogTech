@@ -1,4 +1,3 @@
-//* Todo esto debe con async await
 export const list = async (table) => {
   return await db[table];
 };
