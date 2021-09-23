@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 /**
  * id, name, last_name, email. password
  */
-//* ojo por default mongo le pone un _id
+//* ojo por default mongo le pone un _id ******
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
