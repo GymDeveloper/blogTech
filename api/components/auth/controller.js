@@ -1,10 +1,10 @@
 import { sign } from "../../../auth";
-import { store } from "../../../store/dummy";
+import { store, find } from "../../../store/dummy";
 import { response } from "../../../network";
-import { hash } from "../../../helper/encrypt";
+import { hash, compare } from "../../../helper/encrypt";
 import userModel from "../user/model";
 
-export const login = (req, res) => {
+export const login = async (req, res) => {
   // ?Destructuracion
   const user = req.body;
 
@@ -16,6 +16,24 @@ export const login = (req, res) => {
 
   const token = sign(payload);
 
+  //? primer debo buscar a mi usario
+  const userData = await find(userModel, "email", user.email);
+  //? luego debo ver si existe
+  if (!userData) return;
+  //? luego comparo la contraseña
+  const validate = compare(user.password, userData.password);
+
+  if (!validate) {
+    return response({
+      res,
+      ok: false,
+      status: 500,
+      data: {
+        message: "User invalid",
+      },
+    });
+  }
+
   return response({
     res,
     data: {
@@ -23,6 +41,8 @@ export const login = (req, res) => {
       token,
     },
   });
+
+  //? si es ok retorno al usuario con su token
 };
 
 export const signUp = async (req, res) => {

@@ -16,12 +16,13 @@ export const store = async (model, data) => {
   object.save();
 };
 
-export const find = async (table, id) => {
+export const find = async (model, key, value) => {
   //? Primero obtengo la lista de datos
-  const dataList = await list(table);
-
+  // const dataList = await list(table);
   //? Buscar por id
-  return dataList.find((data) => data.id === id);
+  // return dataList.find((data) => data.id === id);
+  const data = model.findOne({ key: value });
+  return data;
 };
 
 export const remove = async (table, id) => {
