@@ -15,6 +15,8 @@ const connect = async (url) => {
   mongoose.connect(url, {
     useNewUrlParser: true,
   });
+
+  console.log("[db] connected");
 };
 
 export default connect;
