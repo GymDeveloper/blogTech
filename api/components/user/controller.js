@@ -7,7 +7,7 @@
  * * Delete user => Id => DELETE
  */
 import { response } from "../../../network";
-import { list, findBy, remove } from "../../../store/dummy";
+import { list, findBy, upsert, remove } from "../../../store/dummy";
 // paso 1 importar el modelo
 import userModel from "./model";
 
@@ -21,22 +21,39 @@ export const show = async (req, res) => {
   // * 2 key = _id
   // * 3 value
   // ? como puedo hacer para que el orden de los parametros no importe?
-  //? deberimoas pasarle un objeto usando destruccion
+  //? deberimoas pasarle un objeto usando destructuracion
   const user = await findBy({ value: id, model: userModel });
 
   if (!user) {
-    response({ ok: false, status: 500, res, data: "error data not found" });
+    return response({
+      ok: false,
+      status: 500,
+      res,
+      data: "error data not found",
+    });
   }
 
   return response({ res, data: user });
 };
 
-export const update = (req, res) => {
+export const update = async (req, res) => {
   const { id } = req.params;
+
+  // ademas del id usamos el bomodeldy que contiene los datos a cambiar
+  const users = await upsert({ model: userModel, id, data: req.body });
+
+  if (!users) {
+    return response({
+      ok: false,
+      status: 500,
+      res,
+      data: "error data not found",
+    });
+  }
 
   return response({
     res,
-    data: { id },
+    data: users,
   });
 };
 

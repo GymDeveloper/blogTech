@@ -29,13 +29,27 @@ export const store = async (model, data) => {
 // la destructuracion es recomendable cuando tengamos mas de 2 parametros
 export const findBy = async ({ model, key = "_id", value }) => {
   try {
-    const data = await model.findOne({ [`${key}`]: value });
-    return data;
+    return await model.findOne({ [`${key}`]: value });
   } catch (err) {
     return false;
   }
+};
 
-  return data;
+/**
+ * Funcion para actualizar
+ * @param {Model} {model}
+ * @param {String} id
+ * @param {Array<Object>} data
+ * @returns
+ */
+export const upsert = async ({ model, id, data }) => {
+  try {
+    // data es un objeto que tiene las columnas del modelo
+    await model.findByIdAndUpdate(id, data);
+    return await list(model);
+  } catch (err) {
+    return false;
+  }
 };
 
 export const remove = async (table, id) => {
