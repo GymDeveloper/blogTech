@@ -23,13 +23,11 @@ export const store = async (model, data) => {
   object.save();
 };
 
-export const find = async (model, key, value) => {
-  //? Primero obtengo la lista de datos
-  // const dataList = await list(table);
-  //? Buscar por id
-  // return dataList.find((data) => data.id === id);
-  const data = model.findOne({ key: value });
-  return data;
+// Porque esto puede por id o por cualquier paremetro
+// esta la opciones de poner multiples parametros
+// por default yo quiro el key = _id
+export const findBy = async ({ model, key = "_id", value }) => {
+  return await model.findOne({ [`${key}`]: value });
 };
 
 export const remove = async (table, id) => {

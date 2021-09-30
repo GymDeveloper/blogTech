@@ -7,17 +7,22 @@
  * * Delete user => Id => DELETE
  */
 import { response } from "../../../network";
-import { list, find, remove } from "../../../store/dummy";
+import { list, findBy, remove } from "../../../store/dummy";
 // paso 1 importar el modelo
 import userModel from "./model";
 
-//*POST
 const USER_TABLE = "users";
 
 export const show = async (req, res) => {
   const { id } = req.params;
-
-  const user = await find(USER_TABLE, id);
+  console.log("id", id);
+  // recordemos que find recibe 3 cosas
+  // * 1 modelo
+  // * 2 key = _id
+  // * 3 value
+  // ? como puedo hacer para que el orden de los parametros no importe?
+  //? deberimoas pasarle un objeto usando destruccion
+  const user = await findBy({ value: id, model: userModel });
   return response({ res, data: user });
 };
 
