@@ -23,6 +23,11 @@ export const show = async (req, res) => {
   // ? como puedo hacer para que el orden de los parametros no importe?
   //? deberimoas pasarle un objeto usando destruccion
   const user = await findBy({ value: id, model: userModel });
+
+  if (!user) {
+    response({ ok: false, status: 500, res, data: "error data not found" });
+  }
+
   return response({ res, data: user });
 };
 

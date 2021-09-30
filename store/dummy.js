@@ -26,8 +26,16 @@ export const store = async (model, data) => {
 // Porque esto puede por id o por cualquier paremetro
 // esta la opciones de poner multiples parametros
 // por default yo quiro el key = _id
+// la destructuracion es recomendable cuando tengamos mas de 2 parametros
 export const findBy = async ({ model, key = "_id", value }) => {
-  return await model.findOne({ [`${key}`]: value });
+  try {
+    const data = await model.findOne({ [`${key}`]: value });
+    return data;
+  } catch (err) {
+    return false;
+  }
+
+  return data;
 };
 
 export const remove = async (table, id) => {
