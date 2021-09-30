@@ -11,8 +11,6 @@ import { list, findBy, upsert, remove } from "../../../store/dummy";
 // paso 1 importar el modelo
 import userModel from "./model";
 
-const USER_TABLE = "users";
-
 export const show = async (req, res) => {
   const { id } = req.params;
   console.log("id", id);
@@ -60,13 +58,18 @@ export const update = async (req, res) => {
 export const destroy = async (req, res) => {
   const { id } = req.params;
 
-  const user = await remove(USER_TABLE, id);
+  const users = await remove(userModel, id);
 
-  if (!user) {
-    return response({ res, ok: false, data: { error: "User not found" } });
+  if (!users) {
+    return response({
+      res,
+      status: 500,
+      ok: false,
+      data: { error: "User not found" },
+    });
   }
 
-  return response({ res, data: { success: "User deleted successfully!" } });
+  return response({ res, data: users });
 };
 
 //* LISTA USUARIOS

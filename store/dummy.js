@@ -37,10 +37,8 @@ export const findBy = async ({ model, key = "_id", value }) => {
 
 /**
  * Funcion para actualizar
- * @param {Model} {model}
- * @param {String} id
- * @param {Array<Object>} data
- * @returns
+ * @param {{model: Model, id: string, data: Object}} parametros
+ * @returns {Array?}
  */
 export const upsert = async ({ model, id, data }) => {
   try {
@@ -52,17 +50,17 @@ export const upsert = async ({ model, id, data }) => {
   }
 };
 
-export const remove = async (table, id) => {
-  const dataList = await list(table);
-
-  //* primero debemos encontrar el indice
-  const index = dataList.findIndex((data) => data.id === id);
-
-  if (index === -1) {
+/**
+ *
+ * @param {Model} model
+ * @param {String} id
+ */
+export const remove = async (model, id) => {
+  try {
+    await model.findByIdAndRemove(id);
+    // para que retorne hacemos que retorne la lista del modelo
+    return await list(model);
+  } catch (err) {
     return false;
   }
-
-  await db[table].splice(index, 1);
-
-  return true;
 };

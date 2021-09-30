@@ -1,5 +1,5 @@
 import { sign } from "../../../auth";
-import { store, find } from "../../../store/dummy";
+import { store, findBy } from "../../../store/dummy";
 import { response } from "../../../network";
 import { hash, compare } from "../../../helper/encrypt";
 import userModel from "../user/model";
@@ -17,7 +17,7 @@ export const login = async (req, res) => {
   const token = sign(payload);
 
   //? primer debo buscar a mi usario
-  const userData = await find(userModel, "email", user.email);
+  const userData = await findBy(userModel, "email", user.email);
   //? luego debo ver si existe
   if (!userData) return;
   //? luego comparo la contraseña
