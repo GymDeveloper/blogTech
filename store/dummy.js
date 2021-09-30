@@ -1,10 +1,17 @@
-export const list = async (table) => {
-  return await db[table];
-};
+import { Model } from "mongoose";
+
+/**
+ * Se encarga de lista en base al model
+ * @param {Model} model
+ * @returns {Array}
+ */
+// * recordemos que esto es una promesa
+// * recuerden que cuando es una funcion inline el return esta implicito
+export const list = async (model) => await model.find();
 
 /**
  * Se encarga de guarda informacion
- * @param {any} model
+ * @param {Model} model
  * @param {Array<any>} data
  * @returns
  */

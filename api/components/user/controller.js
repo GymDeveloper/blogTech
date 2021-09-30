@@ -8,6 +8,8 @@
  */
 import { response } from "../../../network";
 import { list, find, remove } from "../../../store/dummy";
+// paso 1 importar el modelo
+import userModel from "./model";
 
 //*POST
 const USER_TABLE = "users";
@@ -41,9 +43,7 @@ export const destroy = async (req, res) => {
 };
 
 //* LISTA USUARIOS
-export const showAll = async (req, res) => {
-  //* Aca traigo la lista de usuarios
-  const users = await list(USER_TABLE);
-
-  return response({ res, data: users });
-};
+//* Aca traigo la lista de usuarios
+// const users = await list(userModel);
+export const showAll = async (req, res) =>
+  response({ res, data: await list(userModel) });
