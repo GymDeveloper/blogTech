@@ -75,5 +75,20 @@ export const destroy = async (req, res) => {
 //* LISTA USUARIOS
 //* Aca traigo la lista de usuarios
 // const users = await list(userModel);
-export const showAll = async (req, res) =>
-  response({ res, data: await list(userModel) });
+export const showAll = async (req, res) => {
+  try {
+    const users = await list(userModel);
+
+    return response({
+      res,
+      data: users,
+    });
+  } catch (error) {
+    return response({
+      res,
+      status: 500,
+      ok: false,
+      data: error.message,
+    });
+  }
+};

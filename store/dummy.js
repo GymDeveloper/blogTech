@@ -19,8 +19,14 @@ export const store = async (model, data) => {
   //* CREO UN DATO Y RETORNO LA LISTA COMPLETA
   // await db[table].push(data);
   // return await list(table);
-  const object = new model(data);
-  object.save();
+  try {
+    const object = new model(data);
+    object.save();
+
+    return object;
+  } catch (err) {
+    return err;
+  }
 };
 
 // Porque esto puede por id o por cualquier paremetro
@@ -29,9 +35,12 @@ export const store = async (model, data) => {
 // la destructuracion es recomendable cuando tengamos mas de 2 parametros
 export const findBy = async ({ model, key = "_id", value }) => {
   try {
-    return await model.findOne({ [`${key}`]: value });
+    const object = await model.findOne({ [`${key}`]: value });
+    console.log("object", object);
+    return object;
   } catch (err) {
-    return false;
+    console.log("err", err.message);
+    return err.message;
   }
 };
 

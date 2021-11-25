@@ -7,6 +7,7 @@ import { base_url, db_url } from "../config/config";
 import { checkToken } from "../auth";
 import { Server as WebSocketServer } from "socket.io";
 import http from "http";
+import cors from "cors";
 // import database
 import connect from "../db";
 
@@ -20,7 +21,7 @@ connect(db_url);
 
 //* Cargando la carpeta public
 app.use(express.static(__dirname + "/public"));
-
+app.use(cors());
 /*
  * connection => Es la palabra reservada la cual se encarga
  * de encender la conexion entre mi cliente y mi servidor
